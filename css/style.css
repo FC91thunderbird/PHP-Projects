@@ -1,0 +1,20 @@
+.navbar-inverse .navbar-nav>li>a:hover {
+    background-color: #c52d2f;
+    color: #fff;
+}
+.list-group {
+    padding-left: 0;
+    margin-bottom: 20px;
+    margin-left: -119px;
+    position:relative;
+}
+.list-group :hover
+{
+	background-color:#fff;
+	
+}
+.navbar-inverse .navbar-brand {
+    color: aqua;
+    font-size: 28px;
+    font-style: italic;
+}
