@@ -1,0 +1,94 @@
+
+
+
+1:- Check Admin
+
+		if (isset($_POST['submit']))
+			{
+				$name = $_POST['name'];
+				$password = md5($_POST['password']);
+
+				$select = mysqli_query($conn,"SELECT * from admin where name = '$name' and password = '$password' ");
+
+				if (mysqli_num_rows($select) != 0)
+			    {
+			     echo "<script type='text/javascript'> location.href='Dashboard.php' </script>";   
+			      }
+			      else
+			      {
+			    echo "<script type='text/javascript'>alert('User Name Or Password Invalid!')</script>";
+			    }
+			}
+
+2:- Insert User & User Exist
+		
+		<!-- Checkbox Value insert -->
+			$service = implode(",",$_POST['service']);
+
+			$check = mysqli_query($conn,"SELECT * from admin where name='$name' and password='$password' ");
+			$row = mysqli_num_rows($check);
+
+			if ($row>0) {
+			    echo "User Allready Exist";
+			}else{
+
+			$sql = mysqli_query($conn, "INSERT INTO admin (name, password, email, phone)
+			    VALUES ('$name', '$password','$email','$phone')");
+
+			    if ( $sql) {
+			        echo "<script type='text/javascript'>alert('User Register successfully')</script>";
+			        echo "<script type='text/javascript'> location.href='insert.php' </script>"; 
+			        
+			    } else {
+			        
+			        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+			    }
+			} 
+
+
+3:- Fetch Data
+
+			$fetch = mysqli_query($conn,"select * from contact ORDER BY id DESC");
+			while ($data = mysqli_fetch_array($fetch))
+			{ ?>
+
+
+4:- Delete Multiple Record using CheckBox
+			
+			if(isset($_POST['submit'])) {
+			$chk = $_POST['chk'];
+			for($i=0;$i<count($chk);$i++){
+				$Did = $chk[$i]; 
+			
+			$del = "delete from contact where id = '$Did' ";
+			$run = mysqli_query($conn,$del);
+			echo "<meta http-equiv=\"refresh\" content=\"0;URL=\">";
+			 echo "<script type='text/javascript'>alert('User delete successfully')</script>";
+		}
+		}
+		$result = mysqli_query($conn,"SELECT * FROM contact ORDER BY id DESC");
+
+
+
+5:- Update Rows and Images
+
+		$image=$_FILES["image"]["name"];
+		$dir="productimages/";
+					
+		move_uploaded_file($_FILES["image"]["tmp_name"],"productimages/".$_FILES["image"]["name"]);
+
+	  	$update = mysqli_query($conn, "UPDATE contact SET fname ='$fname', email='$email', phone='$phone' , call1='$call1' , budget='$budget', date='$date' where id= $id");
+	    
+
+	    if ( $update) {
+	        echo "<script type='text/javascript'>alert('Updated Data successfully')</script>";
+	        echo "<script type='text/javascript'> location.href='Dashboard.php' </script>"; 
+	        
+	    } else {
+	        
+	        echo "Error: " . $update . "<br>" . mysqli_error($conn);
+	    }
+
+
+
+
